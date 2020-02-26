@@ -1,0 +1,35 @@
+<%= flash[:notice] %>
+
+<% if flash[:success] %>
+  <div class="flash">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<%= render '/users/show', user: @user,book: @book %>
+<!-- 共通部分 -->
+
+    <div class="col-xs-9">
+      <h2>Books</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <th></th>
+          <th>title</th>
+          <th>body</th>
+        </thead>
+        <% @books.each do |f| %>
+        <tr>
+          <td><%= link_to attachment_image_tag(f.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg"),user_path(f.user.id) %></td>
+          <%# 本を出力するのではなく、本と関連したユーザーの画像を出したいから %>
+          <!-- .userは、「モデル名（小文字）でデータを参照できる,：データを指定」-->
+          <td><%= link_to f.title, book_path(f.id) %></td>
+          <td><%= f.body %></td>
+          <% end %>
+        </tr>
+       </table>
+
+      </div>
+  </div>
+</div>
+<!-- ここにも編集じゃなくて詳細リンク繋がないと→OK -->
+<%# このファイルも完全理解 %>
